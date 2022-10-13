@@ -1,0 +1,22 @@
+@import '~antd/dist/antd.css';
+html,
+body {
+  margin: 0;
+  padding: 0;
+
+  
+}
+.blog{
+  width: 1440px;
+  height: 100%;
+  background: #E5E5E5;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+
+&-pagination {
+  margin-bottom: 25px;
+  margin-top: 40px;
+  text-align: center;
+}
+}

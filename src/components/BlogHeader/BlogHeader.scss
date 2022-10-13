@@ -1,0 +1,30 @@
+.blog-header {
+  height: 80px;
+  width: 1440px;
+  position: relative;
+  background: #ffffff;
+  margin-bottom: 26px;
+  &-title__wrapper {
+    display: flex;
+    align-items: center;
+  }
+  &-button__wrapper {
+    display: flex;
+    position: absolute;
+    right: 14px;
+    top: 15px;
+  }
+  &-text {
+    padding: 29px;
+  }
+  &-btn {
+    border: none;
+    outline: none;
+    background: #ffffff;
+  }
+  &-btn:last-child {
+    padding: 15px 15px 15px 52px;
+    color: #52c41a;
+    border: 1px #52c41a;
+  }
+}
