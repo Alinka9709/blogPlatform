@@ -16,15 +16,18 @@
   }
   &-text {
     padding: 29px;
+    font-size: 18px;
+    line-height: 28px;
   }
   &-btn {
     border: none;
     outline: none;
     background: #ffffff;
+    font-size: 18px;
+    line-height: 28px;
   }
   &-btn:last-child {
-    padding: 15px 15px 15px 52px;
+    padding: 11px 33px 13px 38px;
     color: #52c41a;
-    border: 1px #52c41a;
   }
 }

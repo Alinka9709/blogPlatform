@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./BlogHeader.scss";
 
 function BlogHeader() {
@@ -8,12 +9,16 @@ function BlogHeader() {
         <span className="blog-header-text">Realworld Blog </span>
       </div>
       <div className="blog-header-button__wrapper">
-        <button type="button" className="blog-header-btn">
-          Sign In
-        </button>
-        <button type="button" className="blog-header-btn">
-          Sign Up
-        </button>
+        <Link to="/sign-in">
+          <button type="button" className="blog-header-btn">
+            Sign In
+          </button>
+        </Link>
+        <Link to="/sign-up">
+          <button type="button" className="blog-header-btn">
+            Sign Up
+          </button>
+        </Link>
       </div>
     </div>
   );

@@ -1,17 +1,17 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { BlogCardsProps } from "../components/interfaces/BlogCardsProps";
 
 interface Blog {
   articles: BlogCardsProps[];
   loading: boolean;
   error: string | null;
-  pageCount: number;
+  post: BlogCardsProps | Record<string, any>;
 }
 const initialState: Blog = {
   articles: [],
+  post: {},
   loading: false,
   error: null,
-  pageCount: 1,
 };
 export const fetchArticles = createAsyncThunk(
   "articles/fetchArticles",
@@ -25,29 +25,41 @@ export const fetchArticles = createAsyncThunk(
     return data.articles;
   },
 );
-// export const fetchPagination = createAsyncThunk(
-//   "articles/fetchArticles",
-//   async function (dispatch: any) {
-//     const response = await fetch("https://blog.kata.academy/api/articles");
-//     if (!response.ok) {
-//       throw new Error("Server Error!");
-//     }
-//     const data = await response.json();
+// eslint-disable-next-line import/prefer-default-export
+export const fetchPagination = createAsyncThunk(
+  "articles/fetchPagination",
+  async function (page: number) {
+    const response = await fetch(
+      `https://blog.kata.academy/api/articles?limit=20&offset=${page}`,
+    );
+    if (!response.ok) {
+      throw new Error("Server Error!");
+    }
+    const data = await response.json();
 
-//     dispatch(setPageCount(data.articles));
-//   },
-// );
+    return data.articles;
+  },
+);
+export const fetchArtclesSkug = createAsyncThunk(
+  "articles/fetchArtclesSkug",
+  async function (skug: string) {
+    const response = await fetch(
+      `https://blog.kata.academy/api/articles/${skug}`,
+    );
+    if (!response.ok) {
+      throw new Error("Server Error!");
+    }
+    const data = await response.json();
+    console.log(data);
+
+    return data.articles;
+  },
+);
 
 export const blogSlice = createSlice({
   name: "counter",
   initialState,
-  reducers: {
-    setPageCount(state, action: PayloadAction<number>) {
-      state.pageCount = action.payload;
-
-      console.log(1);
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchArticles.pending, (state) => {
@@ -57,10 +69,16 @@ export const blogSlice = createSlice({
       .addCase(fetchArticles.fulfilled, (state, action) => {
         state.articles = action.payload;
         state.loading = false;
+      })
+      .addCase(fetchPagination.fulfilled, (state, action) => {
+        state.articles = action.payload;
+      })
+      .addCase(fetchArtclesSkug.fulfilled, (state, action) => {
+        state.post = action.payload;
       });
   },
 });
 
-export const { setPageCount } = blogSlice.actions;
+// export const {  } = blogSlice.actions;
 
 export default blogSlice.reducer;
