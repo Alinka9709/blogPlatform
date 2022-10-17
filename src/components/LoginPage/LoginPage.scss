@@ -1,0 +1,45 @@
+.wrapper-registration-user {
+    width: 384px;
+    height: 100%;
+    background: #ffffff;
+  }
+  .registration-user {
+    width: 320px;
+    height: 40px;
+    padding-left: 10px;
+    &__container {
+      text-align: center;
+      margin-top: 50px;
+    }
+    &__header {
+      padding: 48px 0 21px;
+    }
+  
+    &__label-text {
+      padding: 0px 20px 0 10px;
+    }
+    &__button {
+      width: 319px;
+      height: 40px;
+  
+      margin-top: 23px;
+      background: #1890ff;
+      color: #ffffff;
+      border-radius: 1px solid #1890ff;
+      margin-bottom: 10px;
+    }
+   &__span {
+    color: #1890ff;
+   }
+   &__text-account{
+    color: #8C8C8C;
+    padding-bottom: 20px;
+   }
+   &__label{
+    display: flex;
+    padding-left: 33px;
+   }
+  }
+  
+  
+  

@@ -5,9 +5,11 @@ import "./BlogHeader.scss";
 function BlogHeader() {
   return (
     <div className="blog-header">
-      <div className="blog-header-title__wrapper">
-        <span className="blog-header-text">Realworld Blog </span>
-      </div>
+      <Link to="/">
+        <div className="blog-header-title__wrapper">
+          <span className="blog-header-text">Realworld Blog </span>
+        </div>
+      </Link>
       <div className="blog-header-button__wrapper">
         <Link to="/sign-in">
           <button type="button" className="blog-header-btn">

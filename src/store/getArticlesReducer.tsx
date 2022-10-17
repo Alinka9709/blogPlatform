@@ -5,11 +5,12 @@ interface Blog {
   articles: BlogCardsProps[];
   loading: boolean;
   error: string | null;
-  post: BlogCardsProps | Record<string, any>;
+  // post: BlogCardsProps | Record<string, any>;
+  post: any;
 }
 const initialState: Blog = {
   articles: [],
-  post: {},
+  post: [],
   loading: false,
   error: null,
 };
@@ -42,7 +43,7 @@ export const fetchPagination = createAsyncThunk(
 );
 export const fetchArtclesSkug = createAsyncThunk(
   "articles/fetchArtclesSkug",
-  async function (skug: string) {
+  async function (skug: string | number) {
     const response = await fetch(
       `https://blog.kata.academy/api/articles/${skug}`,
     );
@@ -50,9 +51,8 @@ export const fetchArtclesSkug = createAsyncThunk(
       throw new Error("Server Error!");
     }
     const data = await response.json();
-    console.log(data);
 
-    return data.articles;
+    return data.article;
   },
 );
 

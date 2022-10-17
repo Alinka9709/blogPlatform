@@ -2,9 +2,11 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import "./ArticlesCards.scss";
 import { Link } from "react-router-dom";
+
 import { BlogCardsProps } from "../interfaces/BlogCardsProps";
-import { fetchArtclesSkug } from "../../store/getArticlesReducer";
+
 import { useAppDispatch } from "../hook/hook";
+import { fetchArtclesSkug } from "../../store/getArticlesReducer";
 import heart from "../../image/heart.png";
 
 interface BlogProps {
@@ -13,10 +15,11 @@ interface BlogProps {
 
 function ArticlesCards({ articles }: BlogProps) {
   const dispatch = useAppDispatch();
+
   return (
     <>
       <div className="articles_card-wrapper">
-        <Link to="/articles/:slug">
+        <Link to="/slug">
           <div
             className="articles_card-title"
             onClick={() => dispatch(fetchArtclesSkug(articles.slug))}
@@ -39,7 +42,7 @@ function ArticlesCards({ articles }: BlogProps) {
         })}
       </div>
       <p className="articles_card-text">{articles.description}</p>
-      <div className="articles_card-author">
+      {/* <div className="articles_card-author">
         <div className="articles_card-info">
           <span className="articles_card-name">{articles.author.username}</span>
           <span className="articles_card-date">
@@ -51,7 +54,7 @@ function ArticlesCards({ articles }: BlogProps) {
           </span>
         </div>
         <img className="articles_card-img" src={articles.author.image} alt="" />
-      </div>
+      </div> */}
     </>
   );
 }
