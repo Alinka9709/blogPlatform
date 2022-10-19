@@ -1,14 +1,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-import { useAppDispatch } from "../hook/hook";
-import { fetchRegisrationUser } from "../../store/getArticlesReducer";
+import "./EditPage.scss";
 import { IFormInputs } from "../interfaces/IFormInputs";
+import { fetchEditUser } from "../../store/getArticlesReducer";
+import { useAppDispatch } from "../hook/hook";
 
-import "./RegisterPage.scss";
-
-function RegisterPage() {
+function EditPage() {
   const dispatch = useAppDispatch();
   const {
     register,
@@ -20,20 +18,17 @@ function RegisterPage() {
   });
   const onSubmit = (data: IFormInputs) => {
     // alert(JSON.stringify(data));
-    console.log(data);
-    dispatch(fetchRegisrationUser(data));
+
+    dispatch(fetchEditUser(data));
     reset();
   };
   return (
     <div className="wrapper-form">
-      <form
-        className="form-registration__container"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <h3 className="form-registration__header">Create new account</h3>
-        <label className="form-registration__label">Username </label>
+      <form className="form-edit__container" onSubmit={handleSubmit(onSubmit)}>
+        <h3 className="form-edit__header">Edit Profile</h3>
+        <label className="form-edit__label">Username </label>
         <input
-          className="form-registration"
+          className="form-edit"
           {...register("userName", {
             required: "The field is required",
             minLength: {
@@ -49,16 +44,16 @@ function RegisterPage() {
         />
         <div>
           {errors?.userName && (
-            <p className="form-registration__error-message">
+            <p className="form-edit__error-message">
               {errors?.userName?.message || "Eror"}
             </p>
           )}
         </div>
 
-        <label className="form-registration__label">Email address </label>
+        <label className="form-edit__label">Email address </label>
         <input
           type="email"
-          className="form-registration"
+          className="form-edit"
           {...register("email", {
             required: "example@example.com",
           })}
@@ -67,16 +62,16 @@ function RegisterPage() {
         <div>
           {" "}
           {errors?.email && (
-            <p className="form-registration__error-message">
+            <p className="form-edit__error-message">
               {errors?.email?.message || "Eror"}
             </p>
           )}
         </div>
 
-        <label className="form-registration__label">Password </label>
+        <label className="form-edit__label"> New Password </label>
         <input
           type="password"
-          className="form-registration"
+          className="form-edit"
           {...register("password", {
             required: "The field is required",
             minLength: {
@@ -94,51 +89,39 @@ function RegisterPage() {
         <div>
           {" "}
           {errors?.password && (
-            <p className="form-registration__error-message">
+            <p className="form-edit__error-message">
               {errors?.password?.message || "Error"}
             </p>
           )}
         </div>
 
-        <label className="form-registration__label">Repeat Password</label>
+        <label className="form-edit__label">Avatar image (url)</label>
         <input
-          type="password"
-          className="form-registration"
+          type="img"
+          className="form-edit"
           {...register("confirmpasword", {
-            required: true,
+            required: "https://www.example.com/image.png",
           })}
-          placeholder="Password"
+          placeholder="Avatar image"
         />
+
         <div>
-          {errors?.password && (
-            <p className="form-registration__error-message">
-              Please,repeat your password!
+          {" "}
+          {errors?.img && (
+            <p className="form-edit__error-message">
+              {errors?.img?.message || "Eror"}
             </p>
           )}
         </div>
-        <div className="form-registration__checkbox">
-          <input type="checkbox" id="scales" name="scales" checked />
-          <label htmlFor="a" className="form-registration__label-text">
-            {" "}
-            I agree to the processing of my personal information
-          </label>
-        </div>
-
         <input
-          className=" form-registration__button"
+          className=" form-edit__button"
           disabled={!isValid}
           type="submit"
-          value="Create"
+          value="Save"
         />
-        <div className=" form-registration__text-account">
-          Already have an account?{" "}
-          <Link to="/sign-in">
-            <span className="form-registration__span">Sign In.</span>
-          </Link>
-        </div>
       </form>
     </div>
   );
 }
 
-export default RegisterPage;
+export default EditPage;

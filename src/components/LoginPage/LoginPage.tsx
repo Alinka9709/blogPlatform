@@ -1,28 +1,43 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Link, Redirect } from "react-router-dom";
+import { fetchLoginUser } from "../../store/getArticlesReducer";
 
+import { IFormInputs } from "../interfaces/IFormInputs";
+import { useAppDispatch } from "../hook/hook";
 import "./LoginPage.scss";
-import { Link } from "react-router-dom";
 
-interface IFormInputs {
-  email: number | string;
-  password: number | string;
-}
+// interface IFormInputRegister {
+//   email: number | string;
+//   password: number | string;
+// }
 
 export default function AuthorizationRegisteredUser() {
+  const [login, setLogin] = useState(false);
+
+  const dispatch = useAppDispatch();
+
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<IFormInputs>({
     mode: "onBlur",
   });
   const onSubmit = (data: IFormInputs) => {
-    alert(JSON.stringify(data));
+    dispatch(fetchLoginUser(data)).then((user) => {
+      if (user) {
+        setLogin(true);
+      }
+    });
+
     reset();
   };
+  if (login) {
+    return <Redirect to="/" />;
+  }
   return (
     <div className="wrapper-registration-user">
       <form
@@ -32,22 +47,25 @@ export default function AuthorizationRegisteredUser() {
         <h3 className="registration-user__header">Sign In</h3>
         <label className="registration-user__label">Email address</label>
         <input
-          className="registration-user"
           type="email"
+          className="form-registration"
           {...register("email", {
-            required: "Email must be a valid email address",
-            minLength: {
-              value: 6,
-              message: "Email needs to be at least 6 characters",
-            },
+            required: "example@example.com",
           })}
           placeholder="Email address"
         />
-        <div> {errors?.email && <p>{errors?.email?.message || "Eror"}</p>}</div>
+        <div>
+          {" "}
+          {errors?.email && (
+            <p className="form-registration__error-message">
+              {errors?.email?.message || "Eror"}
+            </p>
+          )}
+        </div>
         <label className="registration-user__label">Password </label>
         <input
           className="registration-user"
-          type="password"
+          // type="password"
           {...register("password", {
             required: "The field is required",
             minLength: {
@@ -59,15 +77,19 @@ export default function AuthorizationRegisteredUser() {
               message: "Password must be no more than 40 characters ",
             },
           })}
-          placeholder="Password"
+          // placeholder="Password"
         />
         <div>
           {" "}
-          {errors?.password && <p>{errors?.password?.message || "Error"}</p>}
+          {errors?.password && (
+            <p className="registration-user__error-message">
+              {errors?.password?.message || "Error"}
+            </p>
+          )}
         </div>
         <input
           className=" registration-user__button"
-          disabled={!isValid}
+          // disabled={!isValid}
           type="submit"
           value="Login"
         />

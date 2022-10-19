@@ -10,18 +10,27 @@ import BlogHeader from "../BlogHeader/BlogHeader";
 import "./App.scss";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import LoginPage from "../LoginPage/LoginPage";
+import BlogHeaderAuthorised from "../BlogHeader/BlogHeaderAuthorised";
+import EditPage from "../EditPage/EditPage";
 
 function App() {
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state) => state.blog);
+  const { loading, error, status } = useAppSelector((state) => state.blog);
+
+  if (status) {
+    localStorage.setItem("token", JSON.stringify(status));
+  }
   useEffect(() => {
     dispatch(fetchArticles());
   }, [dispatch]);
 
   return (
     <section className="blog">
-      {/* <Router> */}
-      <BlogHeader />
+      {localStorage.getItem("token") ? (
+        <BlogHeaderAuthorised />
+      ) : (
+        <BlogHeader />
+      )}
       <section className="blog__wrapper">
         {loading && <h2>Loading...</h2>}
         {error && <h2>An error occured: {error}</h2>}
@@ -30,9 +39,9 @@ function App() {
           <Route path="/slug" component={ArticlesPost} />
           <Route exact path="/sign-in" component={LoginPage} />
           <Route exact path="/sign-up" component={RegisterPage} />
+          <Route exact path="/profile" component={EditPage} />
         </Switch>
       </section>
-      {/* </Router> */}
     </section>
   );
 }

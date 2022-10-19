@@ -22,9 +22,10 @@ function ArticlesList() {
       <Pagination
         onChange={(num) => dispatch(fetchPagination(num))}
         className="ant-pagination blog-pagination"
-        size="small"
-        total={50}
+        defaultCurrent={6}
+        total={500}
       />
+      ;
     </ul>
   );
 }

@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+// import { useAppSelector } from "../hook/hook";
 import "./BlogHeader.scss";
 
 function BlogHeader() {
+  // const { token } = useAppSelector((state) => state.blog);
+  // token === 'false' ?
   return (
     <div className="blog-header">
       <Link to="/">
