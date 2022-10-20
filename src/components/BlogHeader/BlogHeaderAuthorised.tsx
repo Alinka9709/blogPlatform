@@ -8,6 +8,10 @@ import { oauth } from "../../store/getArticlesReducer";
 function BlogHeaderAuthorised() {
   const name = localStorage.getItem("username");
   const dispatch = useAppDispatch();
+  const remove = () => {
+    localStorage.clear();
+    dispatch(oauth(false));
+  };
 
   return (
     <div className="blog-header-authorised">
@@ -30,7 +34,7 @@ function BlogHeaderAuthorised() {
         <button
           type="button"
           className="blog-header-authorised-btn"
-          onClick={() => dispatch(oauth())}
+          onClick={() => remove()}
         >
           Log Out
         </button>

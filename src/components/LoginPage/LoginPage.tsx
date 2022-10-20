@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -50,22 +51,24 @@ export default function AuthorizationRegisteredUser() {
           type="email"
           className="form-registration"
           {...register("email", {
-            required: "example@example.com",
+            required: "Email is required",
+            pattern: /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/,
           })}
           placeholder="Email address"
         />
         <div>
           {" "}
           {errors?.email && (
-            <p className="form-registration__error-message">
-              {errors?.email?.message || "Eror"}
+            <p className="registration-user__error-message">
+              {errors?.email?.message || "Please enter a valid email"}
             </p>
           )}
         </div>
+
         <label className="registration-user__label">Password </label>
         <input
-          className="registration-user"
-          // type="password"
+          type="password"
+          className="form-registration"
           {...register("password", {
             required: "The field is required",
             minLength: {
@@ -77,8 +80,9 @@ export default function AuthorizationRegisteredUser() {
               message: "Password must be no more than 40 characters ",
             },
           })}
-          // placeholder="Password"
+          placeholder="Password"
         />
+
         <div>
           {" "}
           {errors?.password && (
@@ -87,9 +91,9 @@ export default function AuthorizationRegisteredUser() {
             </p>
           )}
         </div>
+
         <input
           className=" registration-user__button"
-          // disabled={!isValid}
           type="submit"
           value="Login"
         />

@@ -1,5 +1,6 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from "react";
+import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "../hook/hook";
@@ -10,17 +11,20 @@ import "./RegisterPage.scss";
 
 function RegisterPage() {
   const dispatch = useAppDispatch();
+
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isValid },
+    watch,
+    formState: { errors },
   } = useForm<IFormInputs>({
-    mode: "onBlur",
+    mode: "all",
   });
+  const password = useRef({});
+  password.current = watch("password", "");
+
   const onSubmit = (data: IFormInputs) => {
-    // alert(JSON.stringify(data));
-    console.log(data);
     dispatch(fetchRegisrationUser(data));
     reset();
   };
@@ -60,7 +64,8 @@ function RegisterPage() {
           type="email"
           className="form-registration"
           {...register("email", {
-            required: "example@example.com",
+            required: "Email is required",
+            pattern: /^[a-za-z0-9]+@(?:[a-za-z0-9]+\.)+[a-za-z]+$/,
           })}
           placeholder="Email address"
         />
@@ -68,11 +73,17 @@ function RegisterPage() {
           {" "}
           {errors?.email && (
             <p className="form-registration__error-message">
-              {errors?.email?.message || "Eror"}
+              {errors?.email?.message || "Please enter a valid email"}
             </p>
           )}
         </div>
-
+        {/* <div>
+          {errors.email && (
+            <p className="form-registration__error-message">
+              {errors?.email?.message}
+            </p>
+          )}
+        </div> */}
         <label className="form-registration__label">Password </label>
         <input
           type="password"
@@ -105,14 +116,19 @@ function RegisterPage() {
           type="password"
           className="form-registration"
           {...register("confirmpasword", {
-            required: true,
+            required: "The field is required",
+            validate: (value) =>
+              value === password.current || "The passwords do not match",
           })}
           placeholder="Password"
         />
+
         <div>
-          {errors?.password && (
+          {" "}
+          {errors?.confirmpasword && (
             <p className="form-registration__error-message">
-              Please,repeat your password!
+              {errors?.confirmpasword?.message ||
+                "OOPPS...Passwords do not match"}
             </p>
           )}
         </div>
@@ -126,7 +142,6 @@ function RegisterPage() {
 
         <input
           className=" form-registration__button"
-          disabled={!isValid}
           type="submit"
           value="Create"
         />

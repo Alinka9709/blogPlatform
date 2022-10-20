@@ -17,8 +17,6 @@ function EditPage() {
     mode: "onBlur",
   });
   const onSubmit = (data: IFormInputs) => {
-    // alert(JSON.stringify(data));
-
     dispatch(fetchEditUser(data));
     reset();
   };

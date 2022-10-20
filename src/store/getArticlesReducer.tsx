@@ -9,7 +9,7 @@ interface Blog {
   // post: BlogCardsProps | Record<string, any>;
   post: any;
   status: boolean;
-  token: boolean;
+
   username: string;
 
   img: string;
@@ -20,7 +20,6 @@ const initialState: Blog = {
   loading: false,
   error: null,
   status: false,
-  token: false,
 
   username: "",
   img: "",
@@ -157,17 +156,13 @@ export const fetchEditUser = createAsyncThunk<
     }
   },
 );
-const clearLocalStatus = () => {
-  const removeStatus = () => localStorage.removeItem("status");
-  removeStatus();
-};
+
 export const blogSlice = createSlice({
   name: "counter",
   initialState,
   reducers: {
-    oauth(state) {
-      clearLocalStatus();
-      state.status = false;
+    oauth(state, action) {
+      state.status = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -191,9 +186,9 @@ export const blogSlice = createSlice({
 
         localStorage.setItem("token", action.payload.user.token);
       })
-      .addCase(fetchLoginUser.fulfilled, (state) => {
-        state.token = true;
+      .addCase(fetchLoginUser.fulfilled, (state, action) => {
         state.status = true;
+        localStorage.setItem("token", action.payload.user.token);
       })
       .addCase(fetchEditUser.fulfilled, (state, action) => {
         state.username = action.payload.user.username;
