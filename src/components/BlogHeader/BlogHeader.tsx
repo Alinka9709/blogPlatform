@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import "./BlogHeader.scss";
 
 function BlogHeader() {
-  // const { token } = useAppSelector((state) => state.blog);
-  // token === 'false' ?
   return (
     <div className="blog-header">
       <Link to="/">
@@ -15,12 +13,12 @@ function BlogHeader() {
       </Link>
       <div className="blog-header-button__wrapper">
         <Link to="/sign-in">
-          <button type="button" className="blog-header-btn">
+          <button type="button" className="blog-header__btn">
             Sign In
           </button>
         </Link>
         <Link to="/sign-up">
-          <button type="button" className="blog-header-btn">
+          <button type="button" className="blog-header__btn">
             Sign Up
           </button>
         </Link>

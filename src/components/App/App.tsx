@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
-
+import CreateNewPost from "../CreateNewPost/CreateNewPost";
 import ArticlesList from "../ArticlesList/ArticlesList";
 import { useAppDispatch, useAppSelector } from "../hook/hook";
 import { fetchArticles, oauth } from "../../store/getArticlesReducer";
@@ -32,10 +32,12 @@ function App() {
         {error && <h2>An error occured: {error}</h2>}
         <Switch>
           <Route exact path="/" component={ArticlesList} />
-          <Route exact path="/slug" component={ArticlesPost} />
+          <Route exact path="/articles" component={ArticlesList} />
+          <Route path="/articles/:slug" component={ArticlesPost} />
           <Route exact path="/sign-in" component={LoginPage} />
           <Route exact path="/sign-up" component={RegisterPage} />
           <Route exact path="/profile" component={EditPage} />
+          <Route exact path="/new-article" component={CreateNewPost} />
         </Switch>
       </section>
     </section>

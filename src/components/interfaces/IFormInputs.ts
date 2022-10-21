@@ -4,4 +4,9 @@ export interface IFormInputs {
   password: string;
   confirmpasword: string;
   img: string;
+  title: "string";
+  description: "string";
+  body: "string";
+  tagList: ["string"];
+  tag: string;
 }

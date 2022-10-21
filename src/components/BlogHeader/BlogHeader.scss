@@ -15,20 +15,31 @@
     top: 15px;
   }
   &-text {
-    padding: 29px;
+    padding: 21px;
     font-size: 18px;
     line-height: 28px;
+    color: rgba(0, 0, 0, 0.85);
   }
-  &-btn {
-    border: none;
-    outline: none;
+  &-text:hover {
+    cursor: pointer;
+
+    border: 2px solid rgba(0, 0, 0, 0.85);
+    border-radius: 5px;
+  }
+  &__btn {
+    // border: none;
+    // outline: none;
     background: #ffffff;
     font-size: 18px;
     line-height: 28px;
+    color: rgba(0, 0, 0, 0.85);
+    // border: 1px solid rgba(0, 0, 0, 0.85);
   }
-  &-btn:last-child {
+  &__btn:last-child {
     padding: 11px 33px 13px 38px;
     color: #52c41a;
+    border: 1px solid #52c41a;
+    border-radius: 5px;
+    margin-right: 15px;
   }
-  
 }

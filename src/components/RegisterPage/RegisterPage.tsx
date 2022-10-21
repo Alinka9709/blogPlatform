@@ -77,13 +77,7 @@ function RegisterPage() {
             </p>
           )}
         </div>
-        {/* <div>
-          {errors.email && (
-            <p className="form-registration__error-message">
-              {errors?.email?.message}
-            </p>
-          )}
-        </div> */}
+
         <label className="form-registration__label">Password </label>
         <input
           type="password"

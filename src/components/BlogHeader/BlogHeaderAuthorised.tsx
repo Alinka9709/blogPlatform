@@ -21,9 +21,11 @@ function BlogHeaderAuthorised() {
         </div>
       </Link>
       <div className="blog-header-authorised-button__wrapper">
-        <button type="button" className="blog-header-authorised-btn">
-          Create article
-        </button>
+        <Link to="/new-article">
+          <button type="button" className="blog-header-authorised-btn">
+            Create article
+          </button>
+        </Link>
         <div className="blog-header-authorised__profile">
           <span className="blog-header-authorised-name">{name}</span>
 

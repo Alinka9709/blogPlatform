@@ -1,0 +1,98 @@
+.wrapper-new-post {
+  width: 938px;
+  height: 100%;
+  background: #ffffff;
+  border-radius: 6px;
+}
+.new-post {
+  width: 300px;
+  height: 40px;
+  border: 1px solid #D9D9D9;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  padding-left: 10px;
+  &__container {
+    text-align: center;
+    margin-top: 50px;
+  }
+  &__title {
+    width: 874px;
+    height: 40px;
+    border: 1px solid #D9D9D9;
+    border-radius: 6px;
+  }
+  &__body {
+    width: 874px;
+    height: 168px;
+    border: 1px solid #D9D9D9;
+    border-radius: 6px;
+
+  }
+  &__header {
+    padding: 48px 0 21px;
+  }
+  &__checkbox {
+    margin-top: 38px;
+    margin-left: 1px;
+  }
+  &__label-text {
+    padding: 0px 20px 0 10px;
+    color: #595959;
+  }
+  &__button {
+    width: 300px;
+    height: 40px;
+    margin-top: 13px;
+    background: #1890ff;
+    color: #ffffff;
+    border: 1px solid #1890ff;
+    margin-bottom: 10px;
+    border-radius: 6px;
+
+  }
+  &__span {
+    color: #1890ff;
+  }
+  &__text-account {
+    color: #8c8c8c;
+    padding-bottom: 20px;
+  }
+  &__label {
+    display: flex;
+    padding-left: 33px;
+    padding-top: 12px;
+  }
+  &__container__tags {
+    display: flex;
+     margin-left: 33px;
+    flex-direction: column;
+  }
+  &__container__button {
+      display: flex;
+      gap: 16px
+  }
+  &__error-message {
+    color: #ff0000;
+  }
+  &__btn{
+    width: 90px;
+    height: 39px;
+    background: #ffffff;
+    border-radius: 6px;
+    color: #F5222D;
+    border: 1px solid #F5222D;
+  }
+  &__btn:last-child{
+    color: #1890FF;
+    border: 1px solid #1890FF;
+  }
+}
+// p {
+//   margin: 0;
+//   padding: 0;
+//   display: flex;
+//   padding-left: 33px;
+//   padding-top: 7px;
+//   // color: red;
+// }
+

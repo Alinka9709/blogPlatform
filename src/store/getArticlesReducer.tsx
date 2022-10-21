@@ -157,6 +157,39 @@ export const fetchEditUser = createAsyncThunk<
   },
 );
 
+export const fetchCreatArticle = createAsyncThunk<
+  any,
+  IFormInputs,
+  { rejectValue: string }
+>(
+  "articles/fetchCreatArticle",
+  async ({ title, description, body, tag }, { rejectWithValue }) => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = await fetch("https://blog.kata.academy/api/articles", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+        body: JSON.stringify({
+          article: { title, description, body, tagList: tag },
+        }),
+      });
+
+      const data = await response.json();
+      console.log(data);
+
+      return data;
+    } catch (err) {
+      // You can choose to use the message attached to err or write a custom error
+
+      return rejectWithValue("Opps there seems to be an error");
+    }
+  },
+);
+
 export const blogSlice = createSlice({
   name: "counter",
   initialState,

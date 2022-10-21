@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 
 import { BlogCardsProps } from "../interfaces/BlogCardsProps";
 
-import { useAppDispatch } from "../hook/hook";
-import { fetchArtclesSkug } from "../../store/getArticlesReducer";
+// import { useAppDispatch } from "../hook/hook";
+
 import heart from "../../image/heart.png";
 
 interface BlogProps {
@@ -14,15 +14,15 @@ interface BlogProps {
 }
 
 function ArticlesCards({ articles }: BlogProps) {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
   return (
     <>
       <div className="articles_card-wrapper">
-        <Link to="/slug">
+        <Link to={`/articles/${articles.slug}`}>
           <div
             className="articles_card-title"
-            onClick={() => dispatch(fetchArtclesSkug(articles.slug))}
+            // onClick={() => dispatch(fetchArtclesSkug(articles.slug))}
           >
             {articles.title}
           </div>

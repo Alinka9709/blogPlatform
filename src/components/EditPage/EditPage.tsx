@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -12,7 +13,7 @@ function EditPage() {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<IFormInputs>({
     mode: "onBlur",
   });
@@ -111,12 +112,7 @@ function EditPage() {
             </p>
           )}
         </div>
-        <input
-          className=" form-edit__button"
-          disabled={!isValid}
-          type="submit"
-          value="Save"
-        />
+        <input className=" form-edit__button" type="submit" value="Save" />
       </form>
     </div>
   );
