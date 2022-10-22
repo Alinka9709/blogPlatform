@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 
 import { BlogCardsProps } from "../interfaces/BlogCardsProps";
 
-// import { useAppDispatch } from "../hook/hook";
-
 import heart from "../../image/heart.png";
 
 interface BlogProps {
@@ -14,18 +12,11 @@ interface BlogProps {
 }
 
 function ArticlesCards({ articles }: BlogProps) {
-  // const dispatch = useAppDispatch();
-
   return (
     <>
       <div className="articles_card-wrapper">
         <Link to={`/articles/${articles.slug}`}>
-          <div
-            className="articles_card-title"
-            // onClick={() => dispatch(fetchArtclesSkug(articles.slug))}
-          >
-            {articles.title}
-          </div>
+          <div className="articles_card-title">{articles.title}</div>
         </Link>
         <div className="articles_card-likes">
           <img className="articles_card-likes__img" src={heart} alt="" />
@@ -42,19 +33,6 @@ function ArticlesCards({ articles }: BlogProps) {
         })}
       </div>
       <p className="articles_card-text">{articles.description}</p>
-      {/* <div className="articles_card-author">
-        <div className="articles_card-info">
-          <span className="articles_card-name">{articles.author.username}</span>
-          <span className="articles_card-date">
-            {new Date(articles.createdAt).toLocaleDateString("en-us", {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            })}
-          </span>
-        </div>
-        <img className="articles_card-img" src={articles.author.image} alt="" />
-      </div> */}
     </>
   );
 }

@@ -1,60 +1,77 @@
 .articles_post {
-    width: 941px;
-    height: 100%;
-    background: #ffffff;
-    list-style: none;
-    position: relative;
-    &-wrapper {
-      display: flex;
-      align-items: center;
-      padding: 15px 19px 0 19px;
-    }
-    &-author{
-      display: flex;
-   
-      position: absolute;
-      right: 14px;
-      top: 15px;
-    }
-    &-info{
-      display: flex;
-      flex-direction: column;
-      padding: 0 19px 0 19px;
-    }
-    &-title {
-      color: #1890ff;
-      font-size: 20px;
-      line-height: 28px;
-    }
-    &-name {
-     color: #000000d9;
-      font-size: 18px;
-      line-height: 28px;
-    }
-  
-    &-genre {
-      border: 1px solid rgba(0, 0, 0, 0.5019607843);
-      padding: 3px;
-      font-size: 11px;
-      line-height: 18px;
-    
-      max-width: 24px;
-      margin-left: 16px;
-    }
-    &-text {
-      padding: 50px;
-    }
-    &-likes__img{
-      padding: 0 5px 0 13px;
-    }
-    &-img {
-      border-radius: 50%;
-      width: 46px;
-      height: 46px;
-    }
-    &-date {
-     color: #00000080;
-  
-    }
+  width: 941px;
+  height: 100%;
+  background: #ffffff;
+  list-style: none;
+  position: relative;
+  &-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 15px 19px 0 19px;
   }
-  
+  &-author {
+    display: flex;
+
+    position: absolute;
+    right: 14px;
+    top: 15px;
+  }
+  &-info {
+    display: flex;
+    flex-direction: column;
+    padding: 0 19px 0 19px;
+  }
+  &-title {
+    color: #1890ff;
+    font-size: 20px;
+    line-height: 28px;
+  }
+  &-name {
+    color: #000000d9;
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  &-genre {
+    border: 1px solid rgba(0, 0, 0, 0.5019607843);
+    padding: 3px;
+    font-size: 11px;
+    line-height: 18px;
+
+    max-width: 24px;
+    margin-left: 16px;
+  }
+  &-text {
+    padding: 50px;
+  }
+  &-likes__img {
+    padding: 0 5px 0 13px;
+  }
+  &-img {
+    border-radius: 50%;
+    width: 46px;
+    height: 46px;
+  }
+  &-date {
+    color: #00000080;
+  }
+  &__container__button {
+    display: flex;
+    position: absolute;
+    right: 15px;
+    bottom: 46px;
+    gap: 15px;
+  }
+  &__btn {
+    width: 90px;
+    height: 39px;
+    background: #ffffff;
+    border-radius: 6px;
+    color: #f5222d;
+    border: 1px solid #f5222d;
+  }
+  &__btn:last-child {
+    color: #52c41a;
+    border: 1px solid #52c41a;
+  }
+}

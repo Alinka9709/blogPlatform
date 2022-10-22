@@ -38,6 +38,11 @@ function App() {
           <Route exact path="/sign-up" component={RegisterPage} />
           <Route exact path="/profile" component={EditPage} />
           <Route exact path="/new-article" component={CreateNewPost} />
+          <Route
+            exact
+            path="/new-article/:slug/edit"
+            component={CreateNewPost}
+          />
         </Switch>
       </section>
     </section>

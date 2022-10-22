@@ -3,7 +3,7 @@ import "./BlogHeaderAuthorised.scss";
 import { Link } from "react-router-dom";
 import img from "../../image/Rectangle 1.png";
 import { useAppDispatch } from "../hook/hook";
-import { oauth } from "../../store/getArticlesReducer";
+import { oauth, setEdit } from "../../store/getArticlesReducer";
 
 function BlogHeaderAuthorised() {
   const name = localStorage.getItem("username");
@@ -22,7 +22,11 @@ function BlogHeaderAuthorised() {
       </Link>
       <div className="blog-header-authorised-button__wrapper">
         <Link to="/new-article">
-          <button type="button" className="blog-header-authorised-btn">
+          <button
+            type="button"
+            onClick={() => dispatch(setEdit(false))}
+            className="blog-header-authorised-btn"
+          >
             Create article
           </button>
         </Link>

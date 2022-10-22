@@ -1,27 +1,47 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import "./CreateNewPost.scss";
-import { IFormInputs } from "../interfaces/IFormInputs";
-import { useAppDispatch } from "../hook/hook";
-import { fetchCreatArticle } from "../../store/getArticlesReducer";
+import { useParams } from "react-router-dom";
+import { IFormArtickeInputs } from "../interfaces/IFormInputs";
+import { useAppDispatch, useAppSelector } from "../hook/hook";
+import {
+  fetchCreatArticle,
+  fetchEditArticle,
+} from "../../store/getArticlesReducer";
 
 function CreateNewPost() {
   const dispatch = useAppDispatch();
+  const isEdit = useAppSelector((state) => state.blog.isEdit);
+  console.log(isEdit);
+
+  const { slug } = useParams();
+  console.log(slug);
+
   const {
     register,
     handleSubmit,
     reset,
 
     formState: { errors },
-  } = useForm<IFormInputs>({
+  } = useForm<IFormArtickeInputs>({
     mode: "all",
   });
 
-  const onSubmit = (data: IFormInputs) => {
-    console.log(data);
-    dispatch(fetchCreatArticle(data));
+  const onSubmit: SubmitHandler<IFormArtickeInputs> = ({
+    title,
+    description,
+    tag,
+    body,
+  }) => {
+    if (isEdit) {
+      dispatch(fetchEditArticle({ title, description, body, slug }));
+      console.log(fetchEditArticle({ title, description, body, slug }));
+    } else {
+      dispatch(fetchCreatArticle({ title, description, body, tag }));
+    }
+
     reset();
   };
   return (

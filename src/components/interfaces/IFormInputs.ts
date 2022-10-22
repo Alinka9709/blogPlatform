@@ -4,9 +4,12 @@ export interface IFormInputs {
   password: string;
   confirmpasword: string;
   img: string;
+}
+export interface IFormArtickeInputs {
   title: "string";
   description: "string";
   body: "string";
-  tagList: ["string"];
-  tag: string;
+  tagList?: ["string"];
+  tag?: string;
+  slug?: any;
 }

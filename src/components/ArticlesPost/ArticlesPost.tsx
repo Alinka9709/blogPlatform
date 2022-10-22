@@ -7,13 +7,16 @@ import heart from "../../image/heart.png";
 import "./ArticlesPost.scss";
 import { fetchArtclesSkug } from "../../store/getArticlesReducer";
 import AviasalesCardAuthor from "../ArticlesCards/AviasalesCardAuthor";
+import ArticlesPostButton from "./ArticlesPostButton";
 
 interface BlogProps {
-  article: BlogCardsProps;
+  post: BlogCardsProps;
 }
 const ArticlesPost: React.FC<BlogProps> = function () {
-  const article = useAppSelector((state) => state.blog.post);
+  const { post, status } = useAppSelector((state) => state.blog);
+
   const dispatch = useAppDispatch();
+  const username = localStorage.getItem("username");
   const { slug } = useParams();
 
   useEffect(() => {
@@ -23,19 +26,23 @@ const ArticlesPost: React.FC<BlogProps> = function () {
     <ul>
       <li className="articles_post">
         <div className="articles_post-wrapper">
-          <div>{article.title}</div>
+          <div>{post.title}</div>
 
           <div className="articles_post-likes">
             <img className="articles_post-likes__img" src={heart} alt="" />
-            <span>{article.favoritesCount}</span>
+            <span>{post.favoritesCount}</span>
           </div>
         </div>
 
         <ReactMarkdown className="articles_post-text">
-          {article.body}
+          {post.body}
         </ReactMarkdown>
 
-        {article.author && <AviasalesCardAuthor articles={article} />}
+        {post.author && <AviasalesCardAuthor articles={post} />}
+
+        {post.author && post.author.username === username && status ? (
+          <ArticlesPostButton post={post} />
+        ) : null}
       </li>
     </ul>
   );

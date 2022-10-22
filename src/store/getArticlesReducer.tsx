@@ -1,6 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { BlogCardsProps } from "../components/interfaces/BlogCardsProps";
-import { IFormInputs } from "../components/interfaces/IFormInputs";
+import {
+  IFormInputs,
+  IFormArtickeInputs,
+} from "../components/interfaces/IFormInputs";
 
 interface Blog {
   articles: BlogCardsProps[];
@@ -9,10 +12,12 @@ interface Blog {
   // post: BlogCardsProps | Record<string, any>;
   post: any;
   status: boolean;
-
   username: string;
-
   img: string;
+  title: string;
+  description: string;
+  body: string;
+  isEdit: boolean;
 }
 const initialState: Blog = {
   articles: [],
@@ -20,9 +25,12 @@ const initialState: Blog = {
   loading: false,
   error: null,
   status: false,
-
   username: "",
   img: "",
+  title: "",
+  description: "",
+  body: "",
+  isEdit: false,
 };
 export const fetchArticles = createAsyncThunk(
   "articles/fetchArticles",
@@ -159,7 +167,7 @@ export const fetchEditUser = createAsyncThunk<
 
 export const fetchCreatArticle = createAsyncThunk<
   any,
-  IFormInputs,
+  IFormArtickeInputs,
   { rejectValue: string }
 >(
   "articles/fetchCreatArticle",
@@ -189,6 +197,40 @@ export const fetchCreatArticle = createAsyncThunk<
     }
   },
 );
+export const fetchEditArticle = createAsyncThunk<
+  any,
+  IFormArtickeInputs,
+  { rejectValue: string }
+>(
+  "articles/fetchEditArticle",
+  async ({ title, description, body, slug }, { rejectWithValue }) => {
+    const token = localStorage.getItem("token");
+    console.log(title, description, body);
+
+    try {
+      const response = await fetch(
+        `https://blog.kata.academy/api/articles/${slug}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+          body: JSON.stringify({
+            article: { title, description, body },
+          }),
+        },
+      );
+
+      const data = await response.json();
+      console.log(data);
+
+      return data;
+    } catch (err) {
+      return rejectWithValue("Opps there seems to be an error");
+    }
+  },
+);
 
 export const blogSlice = createSlice({
   name: "counter",
@@ -196,6 +238,9 @@ export const blogSlice = createSlice({
   reducers: {
     oauth(state, action) {
       state.status = action.payload;
+    },
+    setEdit(state, action) {
+      state.isEdit = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -226,10 +271,15 @@ export const blogSlice = createSlice({
       .addCase(fetchEditUser.fulfilled, (state, action) => {
         state.username = action.payload.user.username;
         state.img = action.payload.user.image;
+      })
+      .addCase(fetchEditArticle.fulfilled, (state, action) => {
+        state.title = action.payload.article.title;
+        state.description = action.payload.article.description;
+        state.body = action.payload.article.body;
       });
   },
 });
 
-export const { oauth } = blogSlice.actions;
+export const { oauth, setEdit } = blogSlice.actions;
 
 export default blogSlice.reducer;
