@@ -3,7 +3,7 @@ import { Pagination } from "antd";
 import ArticlesCards from "../ArticlesCards/ArticlesCards";
 import { useAppSelector, useAppDispatch } from "../hook/hook";
 import { BlogCardsProps } from "../interfaces/BlogCardsProps";
-import { fetchPagination } from "../../store/getArticlesReducer";
+import { fetchPagination } from "../../store/ApiReducer";
 import AviasalesCardAuthor from "../ArticlesCards/AviasalesCardAuthor";
 
 function ArticlesList() {

@@ -5,6 +5,8 @@
   list-style: none;
 position: relative;
     margin-bottom: 26px;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgb(0 0 0 / 24%);
   &-wrapper {
     display: flex;
     align-items: center;

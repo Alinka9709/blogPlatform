@@ -3,7 +3,8 @@ import { Switch, Route } from "react-router-dom";
 import CreateNewPost from "../CreateNewPost/CreateNewPost";
 import ArticlesList from "../ArticlesList/ArticlesList";
 import { useAppDispatch, useAppSelector } from "../hook/hook";
-import { fetchArticles, oauth } from "../../store/getArticlesReducer";
+import { oauth } from "../../store/getArticlesReducer";
+import { fetchArticles } from "../../store/ApiReducer";
 import ArticlesPost from "../ArticlesPost/ArticlesPost";
 
 import BlogHeader from "../BlogHeader/BlogHeader";

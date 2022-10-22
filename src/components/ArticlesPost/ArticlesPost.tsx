@@ -5,7 +5,7 @@ import { BlogCardsProps } from "../interfaces/BlogCardsProps";
 import { useAppDispatch, useAppSelector } from "../hook/hook";
 import heart from "../../image/heart.png";
 import "./ArticlesPost.scss";
-import { fetchArtclesSkug } from "../../store/getArticlesReducer";
+import { fetchArtclesSlug } from "../../store/ApiReducer";
 import AviasalesCardAuthor from "../ArticlesCards/AviasalesCardAuthor";
 import ArticlesPostButton from "./ArticlesPostButton";
 
@@ -20,7 +20,7 @@ const ArticlesPost: React.FC<BlogProps> = function () {
   const { slug } = useParams();
 
   useEffect(() => {
-    dispatch(fetchArtclesSkug(slug));
+    dispatch(fetchArtclesSlug(slug));
   }, [dispatch, slug]);
   return (
     <ul>

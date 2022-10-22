@@ -1,15 +1,16 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useAppDispatch } from "../hook/hook";
-import { fetchRegisrationUser } from "../../store/getArticlesReducer";
+import { fetchRegisrationUser } from "../../store/ApiReducer";
 import { IFormInputs } from "../interfaces/IFormInputs";
 
 import "./RegisterPage.scss";
 
 function RegisterPage() {
+  const [login, setLogin] = useState(false);
   const dispatch = useAppDispatch();
 
   const {
@@ -25,9 +26,16 @@ function RegisterPage() {
   password.current = watch("password", "");
 
   const onSubmit = (data: IFormInputs) => {
-    dispatch(fetchRegisrationUser(data));
+    dispatch(fetchRegisrationUser(data)).then((user) => {
+      if (user) {
+        setLogin(true);
+      }
+    });
     reset();
   };
+  if (login) {
+    return <Redirect to="/" />;
+  }
   return (
     <div className="wrapper-form">
       <form

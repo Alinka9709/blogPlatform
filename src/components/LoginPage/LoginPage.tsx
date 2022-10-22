@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, Redirect } from "react-router-dom";
-import { fetchLoginUser } from "../../store/getArticlesReducer";
+import { fetchLoginUser } from "../../store/ApiReducer";
 
 import { IFormInputs } from "../interfaces/IFormInputs";
 import { useAppDispatch } from "../hook/hook";

@@ -1,13 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Redirect } from "react-router-dom";
 import "./EditPage.scss";
 import { IFormInputs } from "../interfaces/IFormInputs";
-import { fetchEditUser } from "../../store/getArticlesReducer";
+import { fetchEditUser } from "../../store/ApiReducer";
 import { useAppDispatch } from "../hook/hook";
 
 function EditPage() {
+  const [login, setLogin] = useState(false);
   const dispatch = useAppDispatch();
   const {
     register,
@@ -18,9 +20,16 @@ function EditPage() {
     mode: "onBlur",
   });
   const onSubmit = (data: IFormInputs) => {
-    dispatch(fetchEditUser(data));
+    dispatch(fetchEditUser(data)).then((user) => {
+      if (user) {
+        setLogin(true);
+      }
+    });
     reset();
   };
+  if (login) {
+    return <Redirect to="/" />;
+  }
   return (
     <div className="wrapper-form">
       <form className="form-edit__container" onSubmit={handleSubmit(onSubmit)}>
@@ -72,15 +81,7 @@ function EditPage() {
           type="password"
           className="form-edit"
           {...register("password", {
-            required: "The field is required",
-            minLength: {
-              value: 6,
-              message: "Password needs to be at least 6 characters",
-            },
-            maxLength: {
-              value: 40,
-              message: "Password must be no more than 40 characters ",
-            },
+            required: false,
           })}
           placeholder="Password"
         />
@@ -99,7 +100,7 @@ function EditPage() {
           type="img"
           className="form-edit"
           {...register("confirmpasword", {
-            required: "https://www.example.com/image.png",
+            required: false,
           })}
           placeholder="Avatar image"
         />
@@ -108,7 +109,7 @@ function EditPage() {
           {" "}
           {errors?.img && (
             <p className="form-edit__error-message">
-              {errors?.img?.message || "Eror"}
+              {errors?.img?.message || "https://www.example.com/image.png"}
             </p>
           )}
         </div>

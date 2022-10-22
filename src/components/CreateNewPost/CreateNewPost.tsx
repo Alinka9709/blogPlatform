@@ -1,23 +1,21 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from "react";
+import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import "./CreateNewPost.scss";
-import { useParams } from "react-router-dom";
+import { useParams, Redirect } from "react-router-dom";
+
 import { IFormArtickeInputs } from "../interfaces/IFormInputs";
 import { useAppDispatch, useAppSelector } from "../hook/hook";
-import {
-  fetchCreatArticle,
-  fetchEditArticle,
-} from "../../store/getArticlesReducer";
+import { fetchCreatArticle, fetchEditArticle } from "../../store/ApiReducer";
 
 function CreateNewPost() {
+  const [edit, setEdit] = useState(false);
+  const [create, setСreate] = useState(false);
   const dispatch = useAppDispatch();
-  const isEdit = useAppSelector((state) => state.blog.isEdit);
-  console.log(isEdit);
+  const { isEdit, post } = useAppSelector((state) => state.blog);
 
   const { slug } = useParams();
-  console.log(slug);
 
   const {
     register,
@@ -36,14 +34,31 @@ function CreateNewPost() {
     body,
   }) => {
     if (isEdit) {
-      dispatch(fetchEditArticle({ title, description, body, slug }));
-      console.log(fetchEditArticle({ title, description, body, slug }));
+      dispatch(fetchEditArticle({ title, description, body, slug })).then(
+        (user) => {
+          if (user) {
+            setСreate(true);
+          }
+        },
+      );
     } else {
-      dispatch(fetchCreatArticle({ title, description, body, tag }));
+      dispatch(fetchCreatArticle({ title, description, body, tag })).then(
+        (user) => {
+          if (user) {
+            setEdit(true);
+          }
+        },
+      );
     }
 
     reset();
   };
+  if (edit) {
+    return <Redirect to="/" />;
+  }
+  if (create) {
+    return <Redirect to="/" />;
+  }
   return (
     <div className="wrapper-new-post">
       <form className="new-post__container" onSubmit={handleSubmit(onSubmit)}>
@@ -55,6 +70,7 @@ function CreateNewPost() {
             required: true,
           })}
           placeholder="Title"
+          defaultValue={isEdit ? post.title : ""}
         />
         <div>
           {errors?.title && (
@@ -71,6 +87,7 @@ function CreateNewPost() {
             required: true,
           })}
           placeholder="Title"
+          defaultValue={isEdit ? post.description : ""}
         />
         <div>
           {" "}
@@ -89,6 +106,7 @@ function CreateNewPost() {
             required: true,
           })}
           placeholder="Text"
+          defaultValue={isEdit ? post.body : ""}
         />
 
         <div>
@@ -109,6 +127,7 @@ function CreateNewPost() {
                 required: true,
               })}
               placeholder="Tag"
+              defaultValue={isEdit ? post.text : ""}
             />
 
             <button type="button" className="new-post__btn">
