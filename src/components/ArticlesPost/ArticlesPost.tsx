@@ -3,9 +3,13 @@ import ReactMarkdown from "react-markdown";
 import { useParams } from "react-router-dom";
 import { BlogCardsProps } from "../interfaces/BlogCardsProps";
 import { useAppDispatch, useAppSelector } from "../hook/hook";
-import heart from "../../image/heart.png";
+
 import "./ArticlesPost.scss";
-import { fetchArtclesSlug } from "../../store/ApiReducer";
+import {
+  fetchArtclesSlug,
+  fetchLike,
+  fetchDeleteLike,
+} from "../../store/ApiReducer";
 import AviasalesCardAuthor from "../ArticlesCards/AviasalesCardAuthor";
 import ArticlesPostButton from "./ArticlesPostButton";
 
@@ -18,10 +22,21 @@ const ArticlesPost: React.FC<BlogProps> = function () {
   const dispatch = useAppDispatch();
   const username = localStorage.getItem("username");
   const { slug } = useParams();
-
+  const toggle = (item: any) => {
+    if (!item.favorited) {
+      dispatch(fetchLike(post.slug)).then(() => {
+        dispatch(fetchArtclesSlug(post.slug));
+      });
+    } else {
+      dispatch(fetchDeleteLike(post.slug)).then(() => {
+        dispatch(fetchArtclesSlug(post.slug));
+      });
+    }
+  };
   useEffect(() => {
     dispatch(fetchArtclesSlug(slug));
   }, [dispatch, slug]);
+
   return (
     <ul>
       <li className="articles_post">
@@ -29,9 +44,26 @@ const ArticlesPost: React.FC<BlogProps> = function () {
           <div>{post.title}</div>
 
           <div className="articles_post-likes">
-            <img className="articles_post-likes__img" src={heart} alt="" />
+            <button
+              type="button"
+              className="articles_post-btn"
+              onClick={() => toggle(post)}
+            >
+              {!post.favorited ? <span> ♡</span> : <span>❤</span>}
+            </button>
+
             <span>{post.favoritesCount}</span>
           </div>
+        </div>
+        <div>
+          {post.tagList &&
+            post.tagList.map((item: string) => {
+              return (
+                <span key={Math.random() * 100} className="articles_post-tags">
+                  {item}
+                </span>
+              );
+            })}
         </div>
 
         <ReactMarkdown className="articles_post-text">

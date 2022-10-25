@@ -1,13 +1,17 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import "./CreateNewPost.scss";
 import { useParams, Redirect } from "react-router-dom";
 
 import { IFormArtickeInputs } from "../interfaces/IFormInputs";
 import { useAppDispatch, useAppSelector } from "../hook/hook";
-import { fetchCreatArticle, fetchEditArticle } from "../../store/ApiReducer";
+import {
+  fetchCreatArticle,
+  fetchEditArticle,
+  fetchArticles,
+} from "../../store/ApiReducer";
 
 function CreateNewPost() {
   const [edit, setEdit] = useState(false);
@@ -21,12 +25,22 @@ function CreateNewPost() {
     register,
     handleSubmit,
     reset,
-
+    control,
     formState: { errors },
   } = useForm<IFormArtickeInputs>({
-    mode: "all",
+    defaultValues: {
+      tag:
+        post.tagList &&
+        post.tagList.map((item: any) => ({
+          value: `${item}`,
+        })),
+    },
+    mode: "onBlur",
   });
-
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "tag",
+  });
   const onSubmit: SubmitHandler<IFormArtickeInputs> = ({
     title,
     description,
@@ -34,21 +48,23 @@ function CreateNewPost() {
     body,
   }) => {
     if (isEdit) {
-      dispatch(fetchEditArticle({ title, description, body, slug })).then(
-        (user) => {
+      dispatch(fetchEditArticle({ title, description, body, slug }))
+        .then((user) => {
           if (user) {
             setСreate(true);
           }
-        },
-      );
+        })
+        .then(() => dispatch(fetchArticles()));
     } else {
-      dispatch(fetchCreatArticle({ title, description, body, tag })).then(
-        (user) => {
+      dispatch(fetchCreatArticle({ title, description, body, tag }))
+        .then((user) => {
           if (user) {
             setEdit(true);
           }
-        },
-      );
+        })
+        .then(() => {
+          dispatch(fetchArticles());
+        });
     }
 
     reset();
@@ -59,6 +75,7 @@ function CreateNewPost() {
   if (create) {
     return <Redirect to="/" />;
   }
+
   return (
     <div className="wrapper-new-post">
       <form className="new-post__container" onSubmit={handleSubmit(onSubmit)}>
@@ -99,8 +116,7 @@ function CreateNewPost() {
         </div>
 
         <label className="new-post__label">Text </label>
-        <input
-          type="text"
+        <textarea
           className="new-post__body"
           {...register("body", {
             required: true,
@@ -129,15 +145,42 @@ function CreateNewPost() {
               placeholder="Tag"
               defaultValue={isEdit ? post.text : ""}
             />
-
-            <button type="button" className="new-post__btn">
-              Delete
-            </button>
-
-            <button type="button" className="new-post__btn">
+            <button
+              type="button"
+              className="new-post__btn"
+              onClick={() =>
+                append({
+                  value: "",
+                })
+              }
+            >
               Add tag
             </button>
           </div>
+          {fields.map((field, index) => {
+            return (
+              <div className="new-post__container__button" key={field.id}>
+                <input
+                  type="text"
+                  className="new-post"
+                  {...register(`tag.${index}.value`, {
+                    required: false,
+                  })}
+                  placeholder="Tag"
+                  defaultValue={`tag.${index}`}
+                />
+
+                <button
+                  type="button"
+                  className="new-post__btn-del"
+                  onClick={() => remove(index)}
+                >
+                  Delete
+                </button>
+              </div>
+            );
+          })}
+
           <div>
             {" "}
             {errors?.tag && (

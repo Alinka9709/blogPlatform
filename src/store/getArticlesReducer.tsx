@@ -4,7 +4,6 @@ import {
   fetchArticles,
   fetchPagination,
   fetchArtclesSlug,
-  fetchRegisrationUser,
   fetchLoginUser,
   fetchEditUser,
   fetchEditArticle,
@@ -14,7 +13,7 @@ interface Blog {
   articles: BlogCardsProps[];
   loading: boolean;
   error: string | null;
-  // post: BlogCardsProps | Record<string, any>;
+
   post: any;
   status: boolean;
   username: string;
@@ -24,6 +23,8 @@ interface Blog {
   body: string;
   isEdit: boolean;
   modal: boolean;
+  favoritesCount: number;
+  favorited: boolean;
 }
 const initialState: Blog = {
   articles: [],
@@ -38,6 +39,8 @@ const initialState: Blog = {
   body: "",
   isEdit: false,
   modal: false,
+  favoritesCount: 0,
+  favorited: true,
 };
 
 export const blogSlice = createSlice({
@@ -52,7 +55,6 @@ export const blogSlice = createSlice({
     },
     setModal(state, action) {
       state.modal = action.payload;
-      // console.log(action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -71,11 +73,7 @@ export const blogSlice = createSlice({
       .addCase(fetchArtclesSlug.fulfilled, (state, action) => {
         state.post = action.payload;
       })
-      .addCase(fetchRegisrationUser.fulfilled, (state, action) => {
-        state.status = true;
 
-        localStorage.setItem("token", action.payload.user.token);
-      })
       .addCase(fetchLoginUser.fulfilled, (state, action) => {
         state.status = true;
         localStorage.setItem("token", action.payload.user.token);

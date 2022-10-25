@@ -7,7 +7,13 @@ import {
 export const fetchArticles = createAsyncThunk(
   "articles/fetchArticles",
   async function () {
-    const response = await fetch("https://blog.kata.academy/api/articles");
+    const token = localStorage.getItem("token");
+    const response = await fetch("https://blog.kata.academy/api/articles", {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    });
+
     if (!response.ok) {
       throw new Error("Server Error!");
     }
@@ -16,7 +22,7 @@ export const fetchArticles = createAsyncThunk(
     return data.articles;
   },
 );
-// eslint-disable-next-line import/prefer-default-export
+
 export const fetchPagination = createAsyncThunk(
   "articles/fetchPagination",
   async function (page: number) {
@@ -84,12 +90,10 @@ export const fetchLoginUser = createAsyncThunk<
       );
 
       const data = await response.json();
-      // localStorage.setItem("username", data.user.username);
+      localStorage.setItem("username", data.user.username);
 
       return data;
     } catch (err) {
-      // You can choose to use the message attached to err or write a custom error
-
       return rejectWithValue("Opps there seems to be an error");
     }
   },
@@ -101,6 +105,8 @@ export const fetchEditUser = createAsyncThunk<
 >(
   "articles/fetchEditUser",
   async ({ userName, email, password, img }, { rejectWithValue }) => {
+    console.log(userName, email, password, img);
+
     const token = localStorage.getItem("token");
     try {
       const response = await fetch("https://blog.kata.academy/api/user", {
@@ -115,7 +121,10 @@ export const fetchEditUser = createAsyncThunk<
       });
 
       const data = await response.json();
+      console.log(data);
+
       localStorage.setItem("username", data.user.username);
+      localStorage.setItem("image", data.user.image);
       return data;
     } catch (err) {
       return rejectWithValue("Opps there seems to be an error");
@@ -145,12 +154,9 @@ export const fetchCreatArticle = createAsyncThunk<
       });
 
       const data = await response.json();
-      console.log(data);
 
       return data;
     } catch (err) {
-      // You can choose to use the message attached to err or write a custom error
-
       return rejectWithValue("Opps there seems to be an error");
     }
   },
@@ -213,8 +219,14 @@ export const fetchDeliteArticle = createAsyncThunk(
 export const fetchArtclesSlug = createAsyncThunk(
   "articles/fetchArtclesSkug",
   async function (slug: string | number) {
+    const token = localStorage.getItem("token");
     const response = await fetch(
       `https://blog.kata.academy/api/articles/${slug}`,
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      },
     );
     if (!response.ok) {
       throw new Error("Server Error!");
@@ -222,5 +234,48 @@ export const fetchArtclesSlug = createAsyncThunk(
     const data = await response.json();
 
     return data.article;
+  },
+);
+
+export const fetchLike = createAsyncThunk(
+  "articles/fetchCreatArticle",
+  async function (slug: string | number) {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(
+      `https://blog.kata.academy/api/articles/${slug}/favorite`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      },
+    );
+
+    const data = await response.json();
+    return data;
+  },
+);
+
+export const fetchDeleteLike = createAsyncThunk(
+  "articles/fetchDeleteLike",
+  async function (slug: string | number) {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(
+      `https://blog.kata.academy/api/articles/${slug}/favorite`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      },
+    );
+
+    const data = await response.json();
+
+    return data;
   },
 );

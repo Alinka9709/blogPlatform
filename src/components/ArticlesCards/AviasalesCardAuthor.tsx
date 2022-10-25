@@ -17,7 +17,7 @@ function AviasalesCardAuthor({ articles }: AuthorProps) {
           })}
         </span>
       </div>
-      <img className="articles_card-img" src={articles?.author.image} alt="" />
+      <img className="articles_card-img" src={articles.author?.image} alt="" />
     </div>
   );
 }

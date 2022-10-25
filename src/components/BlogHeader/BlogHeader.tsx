@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import { useAppSelector } from "../hook/hook";
 import "./BlogHeader.scss";
 
 function BlogHeader() {
@@ -18,7 +17,7 @@ function BlogHeader() {
           </button>
         </Link>
         <Link to="/sign-up">
-          <button type="button" className="blog-header__btn">
+          <button type="button" className="blog-header__btn-green">
             Sign Up
           </button>
         </Link>

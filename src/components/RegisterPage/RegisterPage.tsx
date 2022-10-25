@@ -135,7 +135,7 @@ function RegisterPage() {
           )}
         </div>
         <div className="form-registration__checkbox">
-          <input type="checkbox" id="scales" name="scales" checked />
+          <input type="checkbox" id="scales" name="scales" />
           <label htmlFor="a" className="form-registration__label-text">
             {" "}
             I agree to the processing of my personal information

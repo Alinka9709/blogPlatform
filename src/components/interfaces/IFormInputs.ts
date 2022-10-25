@@ -10,6 +10,6 @@ export interface IFormArtickeInputs {
   description: "string";
   body: "string";
   tagList?: ["string"];
-  tag?: string;
-  slug?: any;
+  tag?: { value: string }[];
+  slug?: string;
 }

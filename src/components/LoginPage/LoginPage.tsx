@@ -9,11 +9,6 @@ import { IFormInputs } from "../interfaces/IFormInputs";
 import { useAppDispatch } from "../hook/hook";
 import "./LoginPage.scss";
 
-// interface IFormInputRegister {
-//   email: number | string;
-//   password: number | string;
-// }
-
 export default function AuthorizationRegisteredUser() {
   const [login, setLogin] = useState(false);
 

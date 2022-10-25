@@ -4,6 +4,8 @@
   background: #ffffff;
   list-style: none;
   position: relative;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgb(0 0 0 / 24%);
   &-wrapper {
     display: flex;
     align-items: center;
@@ -44,13 +46,22 @@
   &-text {
     padding: 50px 50px 50px 0;
   }
-  &-likes__img {
-    padding: 0 5px 0 13px;
+  &-tags {
+    border: 1px solid rgba(0, 0, 0, 0.5019607843);
+    padding: 3px;
+    font-size: 11px;
+    line-height: 18px;
+
+    max-width: 24px;
+    margin-left: 16px;
   }
-  &-img {
-    border-radius: 50%;
-    width: 46px;
-    height: 46px;
+  &-btn {
+    border: none;
+    outline: none;
+    background: #ffffff;
+  }
+  &-btn:hover{
+    cursor: pointer;
   }
   &-date {
     color: #00000080;
@@ -62,6 +73,9 @@
     bottom: 46px;
     gap: 15px;
   }
+  &-heart:hover{
+    cursor: pointer;
+  }
   &__btn {
     width: 90px;
     height: 39px;
@@ -70,8 +84,17 @@
     color: #f5222d;
     border: 1px solid #f5222d;
   }
+  &__btn:hover {
+ 
+    color: #ffffff;
+   background-color:  #f5222d;
+  }
   &__btn:last-child {
     color: #52c41a;
     border: 1px solid #52c41a;
+  }
+  &__btn:last-child:hover {
+    color: #ffffff;
+    background:  #52c41a;
   }
 }

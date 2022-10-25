@@ -7,7 +7,7 @@
 .new-post {
   width: 300px;
   height: 40px;
-  border: 1px solid #D9D9D9;
+  border: 1px solid #d9d9d9;
   border-radius: 6px;
   margin-bottom: 8px;
   padding-left: 10px;
@@ -18,15 +18,14 @@
   &__title {
     width: 874px;
     height: 40px;
-    border: 1px solid #D9D9D9;
+    border: 1px solid #d9d9d9;
     border-radius: 6px;
   }
   &__body {
     width: 874px;
     height: 168px;
-    border: 1px solid #D9D9D9;
+    border: 1px solid #d9d9d9;
     border-radius: 6px;
-
   }
   &__header {
     padding: 48px 0 21px;
@@ -48,7 +47,6 @@
     border: 1px solid #1890ff;
     margin-bottom: 10px;
     border-radius: 6px;
-
   }
   &__span {
     color: #1890ff;
@@ -64,27 +62,40 @@
   }
   &__container__tags {
     display: flex;
-     margin-left: 33px;
+    margin-left: 33px;
     flex-direction: column;
   }
   &__container__button {
-      display: flex;
-      gap: 16px
+    display: flex;
+    gap: 16px;
   }
   &__error-message {
     color: #ff0000;
+  }
+  &__btn-del {
+    width: 90px;
+    height: 39px;
+    background: #ffffff;
+    border-radius: 6px;
+    color: #f5222d;
+    border: 1px solid #f5222d;
+  }
+  &__btn-del:hover {
+    color: #ffffff;
+    background:  #f5222d;
   }
   &__btn{
     width: 90px;
     height: 39px;
     background: #ffffff;
     border-radius: 6px;
-    color: #F5222D;
-    border: 1px solid #F5222D;
+    color: #1890ff;
+    border: 1px solid #1890ff;
   }
-  &__btn:last-child{
-    color: #1890FF;
-    border: 1px solid #1890FF;
+  &__btn:hover {
+    
+    color: #ffffff;
+    background: #1890ff;
   }
 }
 // p {
@@ -95,4 +106,3 @@
 //   padding-top: 7px;
 //   // color: red;
 // }
-

@@ -5,41 +5,56 @@
   background: #ffffff;
   margin-bottom: 26px;
   &-title__wrapper {
-    display: flex;
-    align-items: center;
+    position: absolute;
+    top: 25px;
+    left: 10px;
   }
   &-button__wrapper {
     display: flex;
     position: absolute;
-    right: 14px;
+    align-items: center;
+    right: 34px;
     top: 15px;
+    gap: 15px;
   }
   &-text {
-    padding: 21px;
+    padding: 10px 15px;
     font-size: 18px;
     line-height: 28px;
     color: rgba(0, 0, 0, 0.85);
   }
   &-text:hover {
     cursor: pointer;
-
-    border: 2px solid rgba(0, 0, 0, 0.85);
+    color: #1890ff;
+    border: 2px solid #1890ff;
     border-radius: 5px;
   }
   &__btn {
-    // border: none;
-    // outline: none;
+    outline: none;
+    box-shadow: none;
     background: #ffffff;
     font-size: 18px;
     line-height: 28px;
     color: rgba(0, 0, 0, 0.85);
-    // border: 1px solid rgba(0, 0, 0, 0.85);
+    border: none;
+    padding: 5px 18px;
   }
-  &__btn:last-child {
-    padding: 11px 33px 13px 38px;
+  &__btn:hover {
+    border: 1px solid rgba(0, 0, 0, 0.85);
+    // padding: 10px;
+    border-radius: 5px;
+  }
+  &__btn-green {
+    padding: 10px;
     color: #52c41a;
     border: 1px solid #52c41a;
     border-radius: 5px;
-    margin-right: 15px;
+    background: #ffffff;
+    font-size: 18px;
+    line-height: 28px;
+  }
+  &__btn-green:hover {
+    color: #ffffff;
+    background: #52c41a;
   }
 }

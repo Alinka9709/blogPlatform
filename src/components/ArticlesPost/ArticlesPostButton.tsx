@@ -1,5 +1,5 @@
 import React from "react";
-import "./ArticlesPost.scss";
+
 import { Link } from "react-router-dom";
 import { BlogCardsProps } from "../interfaces/BlogCardsProps";
 import { setEdit, setModal } from "../../store/getArticlesReducer";
@@ -38,7 +38,7 @@ function ArticlesPostButton({ post }: ButtonProps) {
           </button>
         </Link>
       </div>
-      {/* <ModalWindow /> */}
+
       {open}
     </>
   );

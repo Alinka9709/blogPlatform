@@ -31,6 +31,12 @@
     border: 1px solid #595959;
     cursor: pointer;
   }
+  &__btn:hover {
+   
+    color:  #1890ff;
+    border: 1px solid  #1890ff;
+    
+  }
   &__btn:last-child {
     background-color: #1890ff;
     color: #ffffff;

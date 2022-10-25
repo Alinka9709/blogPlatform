@@ -99,7 +99,7 @@ function EditPage() {
         <input
           type="img"
           className="form-edit"
-          {...register("confirmpasword", {
+          {...register("img", {
             required: false,
           })}
           placeholder="Avatar image"
