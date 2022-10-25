@@ -30,7 +30,7 @@ function CreateNewPost() {
   } = useForm<IFormArtickeInputs>({
     defaultValues: {
       tag:
-        // post.tagList &&
+        post.tagList &&
         post.tagList.map((item: any) => ({
           value: `${item}`,
         })),
