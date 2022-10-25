@@ -1,1 +1,1 @@
-https://blog-platform-tau.vercel.app/
+https://blog-platform-alinka9709.vercel.app/
