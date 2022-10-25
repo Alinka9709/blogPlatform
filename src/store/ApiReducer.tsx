@@ -167,7 +167,7 @@ export const fetchEditArticle = createAsyncThunk<
   { rejectValue: string }
 >(
   "articles/fetchEditArticle",
-  async ({ title, description, body, slug }, { rejectWithValue }) => {
+  async ({ title, description, body, slug, a }, { rejectWithValue }) => {
     const token = localStorage.getItem("token");
 
     try {
@@ -180,7 +180,7 @@ export const fetchEditArticle = createAsyncThunk<
             Authorization: `Token ${token}`,
           },
           body: JSON.stringify({
-            article: { title, description, body },
+            article: { title, description, body, tagList: a },
           }),
         },
       );

@@ -18,7 +18,7 @@ function CreateNewPost() {
   const [create, setСreate] = useState(false);
   const dispatch = useAppDispatch();
   const { isEdit, post } = useAppSelector((state) => state.blog);
-
+  const token = localStorage.getItem("token");
   const { slug } = useParams();
 
   const {
@@ -30,16 +30,12 @@ function CreateNewPost() {
   } = useForm<IFormArtickeInputs>({
     defaultValues: {
       tag:
-        post.tagList &&
+        // post.tagList &&
         post.tagList.map((item: any) => ({
           value: `${item}`,
         })),
     },
-    mode: "onBlur",
-  });
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "tag",
+    mode: "onChange",
   });
 
   const onSubmit: SubmitHandler<IFormArtickeInputs> = (data) => {
@@ -47,7 +43,7 @@ function CreateNewPost() {
     const a = tag?.map((item) => item.value);
 
     if (isEdit) {
-      dispatch(fetchEditArticle({ title, description, body, slug, a }))
+      dispatch(fetchEditArticle({ title, description, body, slug, a, token }))
         .then((user) => {
           if (user) {
             setСreate(true);
@@ -55,7 +51,7 @@ function CreateNewPost() {
         })
         .then(() => dispatch(fetchArticles()));
     } else {
-      dispatch(fetchCreatArticle({ title, description, body, a }))
+      dispatch(fetchCreatArticle({ title, description, body, a, token }))
         .then((user) => {
           if (user) {
             setEdit(true);
@@ -68,6 +64,11 @@ function CreateNewPost() {
 
     reset();
   };
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "tag",
+  });
+
   if (edit) {
     return <Redirect to="/" />;
   }
@@ -135,15 +136,6 @@ function CreateNewPost() {
         <label className="new-post__label">Tags</label>
         <div className="new-post__container__tags">
           <div className="new-post__container__button">
-            <input
-              type="text"
-              className="new-post"
-              {...register("tag", {
-                required: false,
-              })}
-              placeholder="Tag"
-              defaultValue={isEdit ? post.text : ""}
-            />
             <button
               type="button"
               className="new-post__btn"
@@ -162,9 +154,8 @@ function CreateNewPost() {
                 <input
                   type="text"
                   className="new-post"
-                  {...register(`tag.${index}.value`, {
-                    required: false,
-                  })}
+                  id="tag"
+                  {...register(`tag.${index}.value` as const)}
                   placeholder="Tag"
                   defaultValue={`tag.${index}`}
                 />
