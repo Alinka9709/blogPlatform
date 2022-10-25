@@ -138,7 +138,7 @@ export const fetchCreatArticle = createAsyncThunk<
   { rejectValue: string }
 >(
   "articles/fetchCreatArticle",
-  async ({ title, description, body, tag }, { rejectWithValue }) => {
+  async ({ title, description, body, a }, { rejectWithValue }) => {
     const token = localStorage.getItem("token");
 
     try {
@@ -149,7 +149,7 @@ export const fetchCreatArticle = createAsyncThunk<
           Authorization: `Token ${token}`,
         },
         body: JSON.stringify({
-          article: { title, description, body, tagList: tag },
+          article: { title, description, body, tagList: a },
         }),
       });
 

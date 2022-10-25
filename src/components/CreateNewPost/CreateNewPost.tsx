@@ -41,14 +41,13 @@ function CreateNewPost() {
     control,
     name: "tag",
   });
-  const onSubmit: SubmitHandler<IFormArtickeInputs> = ({
-    title,
-    description,
-    tag,
-    body,
-  }) => {
+
+  const onSubmit: SubmitHandler<IFormArtickeInputs> = (data) => {
+    const { title, description, body, tag } = data;
+    const a = tag?.map((item) => item.value);
+
     if (isEdit) {
-      dispatch(fetchEditArticle({ title, description, body, slug }))
+      dispatch(fetchEditArticle({ title, description, body, slug, a }))
         .then((user) => {
           if (user) {
             setСreate(true);
@@ -56,7 +55,7 @@ function CreateNewPost() {
         })
         .then(() => dispatch(fetchArticles()));
     } else {
-      dispatch(fetchCreatArticle({ title, description, body, tag }))
+      dispatch(fetchCreatArticle({ title, description, body, a }))
         .then((user) => {
           if (user) {
             setEdit(true);
@@ -140,7 +139,7 @@ function CreateNewPost() {
               type="text"
               className="new-post"
               {...register("tag", {
-                required: true,
+                required: false,
               })}
               placeholder="Tag"
               defaultValue={isEdit ? post.text : ""}
