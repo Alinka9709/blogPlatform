@@ -1,0 +1,50 @@
+.modalwindow__wrapper {
+  width: 240px;
+  height: 104px;
+  background: #ffffff;
+  border-radius: 4px;
+  position: absolute;
+  left: 817px;
+  top: 92px;
+  box-shadow: 2px 2px 2px 2px rgb(1 1 0 / 20%);
+}
+.modalwindow {
+  padding: 15px;
+  &__container__button {
+    display: flex;
+    gap: 8px;
+    justify-content: end;
+    margin-bottom: 14px;
+  }
+  &__img-container {
+    padding-right: 5px;
+  }
+  &__img {
+    height: 15px;
+  }
+  &__btn {
+    width: 34px;
+    height: 24px;
+    background: #ffffff;
+    border-radius: 4px;
+    color: #595959;
+    border: 1px solid #595959;
+    cursor: pointer;
+  }
+  &__btn:hover {
+   
+    color:  #1890ff;
+    border: 1px solid  #1890ff;
+    
+  }
+  &__btn:last-child {
+    background-color: #1890ff;
+    color: #ffffff;
+    border: 1px solid #1890ff;
+    margin-right: 13px;
+  }
+  &__text {
+    margin: 0;
+    padding: 0;
+  }
+}

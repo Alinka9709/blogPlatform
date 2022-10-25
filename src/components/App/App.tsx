@@ -1,46 +1,37 @@
-import React, { useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Pagination } from "antd";
-import ArticlesList from "../ArticlesList/ArticlesList";
-import { useAppDispatch, useAppSelector } from "../hook/hook";
-import { fetchArticles, fetchPagination } from "../../store/getArticlesReducer";
-import ArticlesPost from "../ArticlesPost/ArticlesPost";
+import React from "react";
+import { Switch, Route } from "react-router-dom";
 
-import BlogHeader from "../BlogHeader/BlogHeader";
+import CreateNewPost from "../CreateNewPost/CreateNewPost";
+import ArticlesList from "../ArticlesList/ArticlesList";
+
+import ArticlesPost from "../ArticlesPost/ArticlesPost";
 import "./App.scss";
+import RegisterPage from "../RegisterPage/RegisterPage";
+import LoginPage from "../LoginPage/LoginPage";
+import Header from "../BlogHeader/Header";
+import EditPage from "../EditPage/EditPage";
 
 function App() {
-  const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state) => state.blog);
-  useEffect(() => {
-    dispatch(fetchArticles());
-  }, [dispatch]);
-
   return (
     <section className="blog">
-      <Router>
-        <BlogHeader />
-        <section className="blog__wrapper">
-          {loading && <h2>Loading...</h2>}
-          {error && <h2>An error occured: {error}</h2>}
-          <Switch>
-            <Route path="/" component={ArticlesList} />
-          </Switch>
-          <Switch>
-            <Route path="/articles" component={ArticlesList} />
-          </Switch>
-          <Switch>
-            <Route path="/articles/:slug" component={ArticlesPost} />
-          </Switch>
+      <Header />
+      <section className="blog__wrapper">
+        <Switch>
+          <Route exact path="/" component={ArticlesList} />
+          <Route exact path="/articles" component={ArticlesList} />
+          <Route path="/articles/:slug" component={ArticlesPost} />
+          <Route exact path="/sign-in" component={LoginPage} />
 
-          <Pagination
-            onChange={(num) => dispatch(fetchPagination(num))}
-            className="ant-pagination blog-pagination"
-            size="small"
-            total={50}
+          <Route exact path="/sign-up" component={RegisterPage} />
+          <Route exact path="/profile" component={EditPage} />
+          <Route exact path="/new-article" component={CreateNewPost} />
+          <Route
+            exact
+            path="/new-article/:slug/edit"
+            component={CreateNewPost}
           />
-        </section>
-      </Router>
+        </Switch>
+      </section>
     </section>
   );
 }

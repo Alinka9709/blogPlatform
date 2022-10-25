@@ -3,21 +3,23 @@
   height: 140px;
   background: #ffffff;
   list-style: none;
-position: relative;
-    margin-bottom: 26px;
+  position: relative;
+  margin-bottom: 26px;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgb(0 0 0 / 24%);
   &-wrapper {
     display: flex;
     align-items: center;
     padding: 15px 19px 0 19px;
   }
-  &-author{
+  &-author {
     display: flex;
- 
+
     position: absolute;
     right: 14px;
     top: 15px;
   }
-  &-info{
+  &-info {
     display: flex;
     flex-direction: column;
     padding: 0 19px 0 19px;
@@ -28,33 +30,41 @@ position: relative;
     line-height: 28px;
   }
   &-name {
-   color: #000000d9;
+    color: #000000d9;
     font-size: 18px;
     line-height: 28px;
   }
 
-  &-genre {
+  &-tags {
     border: 1px solid rgba(0, 0, 0, 0.5019607843);
     padding: 3px;
     font-size: 11px;
     line-height: 18px;
-  
+
     max-width: 24px;
     margin-left: 16px;
   }
   &-text {
     padding-left: 19px;
   }
-  &-likes__img{
+  &-btn {
+    border: none;
+    outline: none;
+    background: #ffffff;
+  }
+  &-btn:hover {
+    cursor: pointer;
+  }
+  &-likes {
     padding: 0 5px 0 13px;
   }
+
   &-img {
     border-radius: 50%;
     width: 46px;
     height: 46px;
   }
   &-date {
-   color: #00000080;
-
+    color: #00000080;
   }
 }

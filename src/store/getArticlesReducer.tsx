@@ -1,65 +1,62 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { BlogCardsProps } from "../components/interfaces/BlogCardsProps";
+import {
+  fetchArticles,
+  fetchPagination,
+  fetchArtclesSlug,
+  fetchLoginUser,
+  fetchEditUser,
+  fetchEditArticle,
+} from "./ApiReducer";
 
 interface Blog {
   articles: BlogCardsProps[];
   loading: boolean;
   error: string | null;
-  post: BlogCardsProps | Record<string, any>;
+
+  post: any;
+  status: boolean;
+  username: string;
+  img: string;
+  title: string;
+  description: string;
+  body: string;
+  isEdit: boolean;
+  modal: boolean;
+  favoritesCount: number;
+  favorited: boolean;
 }
 const initialState: Blog = {
   articles: [],
-  post: {},
+  post: [],
   loading: false,
   error: null,
+  status: false,
+  username: "",
+  img: "",
+  title: "",
+  description: "",
+  body: "",
+  isEdit: false,
+  modal: false,
+  favoritesCount: 0,
+  favorited: true,
 };
-export const fetchArticles = createAsyncThunk(
-  "articles/fetchArticles",
-  async function () {
-    const response = await fetch("https://blog.kata.academy/api/articles");
-    if (!response.ok) {
-      throw new Error("Server Error!");
-    }
-    const data = await response.json();
-
-    return data.articles;
-  },
-);
-// eslint-disable-next-line import/prefer-default-export
-export const fetchPagination = createAsyncThunk(
-  "articles/fetchPagination",
-  async function (page: number) {
-    const response = await fetch(
-      `https://blog.kata.academy/api/articles?limit=20&offset=${page}`,
-    );
-    if (!response.ok) {
-      throw new Error("Server Error!");
-    }
-    const data = await response.json();
-
-    return data.articles;
-  },
-);
-export const fetchArtclesSkug = createAsyncThunk(
-  "articles/fetchArtclesSkug",
-  async function (skug: string) {
-    const response = await fetch(
-      `https://blog.kata.academy/api/articles/${skug}`,
-    );
-    if (!response.ok) {
-      throw new Error("Server Error!");
-    }
-    const data = await response.json();
-    console.log(data);
-
-    return data.articles;
-  },
-);
 
 export const blogSlice = createSlice({
   name: "counter",
   initialState,
-  reducers: {},
+  reducers: {
+    oauth(state, action) {
+      state.status = action.payload;
+    },
+    setEdit(state, action) {
+      state.isEdit = action.payload;
+    },
+    setModal(state, action) {
+      state.modal = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchArticles.pending, (state) => {
@@ -73,12 +70,26 @@ export const blogSlice = createSlice({
       .addCase(fetchPagination.fulfilled, (state, action) => {
         state.articles = action.payload;
       })
-      .addCase(fetchArtclesSkug.fulfilled, (state, action) => {
+      .addCase(fetchArtclesSlug.fulfilled, (state, action) => {
         state.post = action.payload;
+      })
+
+      .addCase(fetchLoginUser.fulfilled, (state, action) => {
+        state.status = true;
+        localStorage.setItem("token", action.payload.user.token);
+      })
+      .addCase(fetchEditUser.fulfilled, (state, action) => {
+        state.username = action.payload.user.username;
+        state.img = action.payload.user.image;
+      })
+      .addCase(fetchEditArticle.fulfilled, (state, action) => {
+        state.title = action.payload.article.title;
+        state.description = action.payload.article.description;
+        state.body = action.payload.article.body;
       });
   },
 });
 
-// export const {  } = blogSlice.actions;
+export const { oauth, setEdit, setModal } = blogSlice.actions;
 
 export default blogSlice.reducer;

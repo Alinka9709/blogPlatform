@@ -1,0 +1,58 @@
+.wrapper-form {
+    width: 384px;
+    height: 100%;
+    background: #ffffff;
+  }
+  .form-edit {
+    width: 320px;
+    height: 40px;
+    padding-left: 10px;
+    &__container {
+      text-align: center;
+      margin-top: 50px;
+    }
+    &__header {
+      padding: 48px 0 21px;
+    }
+    &__checkbox {
+      margin-top: 38px;
+      margin-left: 1px;
+    }
+    &__label-text {
+      padding: 0px 20px 0 10px;
+      color: #595959;
+    }
+    &__button {
+      width: 319px;
+      height: 40px;
+  
+      margin-top: 23px;
+      background: #1890ff;
+      color: #ffffff;
+      border: 1px solid #1890ff;
+      margin-bottom: 40px
+    }
+   &__span {
+    color: #1890ff;
+   }
+   &__text-account{
+    color: #8C8C8C;
+    padding-bottom: 20px;
+   }
+   &__label{
+    display: flex;
+    padding-left: 33px;
+    padding-top: 12px;
+   }
+   &__error-message{
+    color: #ff0000
+   }
+  }
+  p {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    padding-left: 33px;
+    padding-top: 7px;
+    // color: red;
+  }

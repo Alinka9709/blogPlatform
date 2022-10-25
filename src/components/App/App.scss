@@ -3,13 +3,14 @@ html,
 body {
   margin: 0;
   padding: 0;
-
+  background: #E5E5E5;
   
 }
+
 .blog{
   width: 1440px;
   height: 100%;
-  background: #E5E5E5;
+
  display: flex;
  flex-direction: column;
  align-items: center;
@@ -18,5 +19,10 @@ body {
   margin-bottom: 25px;
   margin-top: 40px;
   text-align: center;
+}
+&__loading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 }

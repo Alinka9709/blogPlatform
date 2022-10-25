@@ -1,4 +1,4 @@
-.blog-header {
+.blog-header-authorised {
   height: 80px;
   width: 1440px;
   position: relative;
@@ -12,10 +12,11 @@
   &-button__wrapper {
     display: flex;
     position: absolute;
-    align-items: center;
-    right: 34px;
+    right: 14px;
     top: 15px;
+
     gap: 15px;
+    align-items: center;
   }
   &-text {
     padding: 10px 15px;
@@ -29,32 +30,52 @@
     border: 2px solid #1890ff;
     border-radius: 5px;
   }
-  &__btn {
-    outline: none;
-    box-shadow: none;
-    background: #ffffff;
-    font-size: 18px;
-    line-height: 28px;
-    color: rgba(0, 0, 0, 0.85);
+  &-btn {
     border: none;
-    padding: 5px 18px;
-  }
-  &__btn:hover {
-    border: 1px solid rgba(0, 0, 0, 0.85);
-    // padding: 10px;
-    border-radius: 5px;
-  }
-  &__btn-green {
-    padding: 10px;
-    color: #52c41a;
-    border: 1px solid #52c41a;
-    border-radius: 5px;
+    outline: none;
     background: #ffffff;
     font-size: 18px;
     line-height: 28px;
   }
-  &__btn-green:hover {
+  &-btn-create {
+    color: #52c41a;
+    border-radius: 5px;
+    border: 1px solid #52c41a;
+    font-size: 18px;
+    line-height: 28px;
+    background: #ffffff;
+  }
+  &-btn-create:hover {
     color: #ffffff;
     background: #52c41a;
+  }
+  &-btn:last-child {
+    border: 1px solid rgba(0, 0, 0, 0.75);
+    border-radius: 5px;
+    padding: 10px;
+  }
+  &-btn:last-child:hover {
+    cursor: pointer;
+    color: #ffffff;
+    background-color: black;
+  }
+  &__profile {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+  &-img {
+    border-radius: 50%;
+
+    height: 46px;
+  }
+  &-img:hover {
+    transform: rotate(50deg) scale(1);
+    // filter: blur(2px);
+  }
+  &-name {
+    color: #000000d9;
+    font-size: 18px;
+    line-height: 28px;
   }
 }
