@@ -6,13 +6,6 @@ export interface IFormInputs {
   img: string;
 }
 export interface IFormArtickeInputs {
-  // title: "string";
-  // description: "string";
-  // body: "string";
-  // tagList: ["string"];
-  // tag?: { value: string }[];
-  // a?: string[];
-  // slug?: string;
   title: string;
   description: string;
   body: string;

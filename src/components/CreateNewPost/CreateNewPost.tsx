@@ -38,8 +38,12 @@ function CreateNewPost() {
     mode: "onChange",
   });
 
-  const onSubmit: SubmitHandler<IFormArtickeInputs> = (data) => {
-    const { title, description, body, tag } = data;
+  const onSubmit: SubmitHandler<IFormArtickeInputs> = ({
+    title,
+    description,
+    body,
+    tag,
+  }) => {
     const a = tag?.map((item) => item.value);
 
     if (isEdit) {
